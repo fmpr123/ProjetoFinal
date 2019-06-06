@@ -9,9 +9,22 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-exports.person_detail=async function(req,res){
-    var query='select * from users';
-    await connection.query(query, function (err, rows, fields) {
+exports.index=async function(req,res){
+    var query='select * from user';
+    await connection.query(query, (err, rows, fields)=> {
+        console.log(rows);
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log('Error!');
+        }
+    });
+};
+
+exports.index=async function(req,res){
+    var query='select * from user';
+    await connection.query(query, (err, rows, fields)=> {
+        console.log(rows);
         if(!err){
             res.send(rows);
         }else{
