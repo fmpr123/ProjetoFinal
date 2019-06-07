@@ -49,6 +49,8 @@
       </v-container>
     </v-content>
 
+    //https://coolors.co/af9164-f7f3e3-b3b6b7-6f1a07-2b2118
+
     <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
