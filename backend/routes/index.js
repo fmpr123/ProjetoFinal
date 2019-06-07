@@ -12,4 +12,12 @@ router.post('/addusers',
   userController.add_users
 );
 
+router.post('/',
+  userController.login
+);
+
+router.post('/post',
+  userController.add_post
+);
+
 module.exports = router;
