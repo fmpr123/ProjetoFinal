@@ -1,14 +1,14 @@
 <template>
 <div class="arroz">
   <p>Users:</p>
-  <ul>
-    <li v-for="user in users" :key="user">{{user.user_name}}</li>
+
+  <ul id="users">
+    <li v-for="user in users" :key="user.user_id">{{user.user_name}}</li>
   </ul>
 
-  <p>Array</p>
-  <ul>
-    <li v-for="fruto in frutos" :key="fruto">{{fruto}}</li>
-  </ul>
+  <div v-for="user in users" :key="user.user_id">
+    <p>{{ user.user_name }}</p>
+  </div>
 
 </div>
 </template>
@@ -16,7 +16,7 @@
 <script>
 import autservices from "@/services/autservices"
 export default {
-  name: 'users',
+  el: 'users',
   data () {
     return {
       users:[],
