@@ -1,10 +1,14 @@
 <template>
 <div class="arroz">
   <p>Users:</p>
+  <ul>
+    <li v-for="user in users" :key="user">{{user.user_name}}</li>
+  </ul>
 
-    <li v-for="user in users" :key="user">
-      {{ user_name }}
-    </li>
+  <p>Array</p>
+  <ul>
+    <li v-for="fruto in frutos" :key="fruto">{{fruto}}</li>
+  </ul>
 
 </div>
 </template>
@@ -15,7 +19,8 @@ export default {
   name: 'users',
   data () {
     return {
-      users:[]
+      users:[],
+      frutos:['banana','tomate']
     }
   },
   async mounted(){
