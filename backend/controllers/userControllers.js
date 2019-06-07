@@ -25,8 +25,6 @@ exports.add_users=async function(req,res){
     var name=req.body.user_name;
     var email=req.body.user_email;
     var password=req.body.user_password;
-    
-
     await connection.query(query,[name,email,password], (err, rows, fields)=> {
         if(!err){
             res.send(rows);
