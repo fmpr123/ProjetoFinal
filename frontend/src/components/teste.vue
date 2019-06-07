@@ -6,8 +6,8 @@
     <li v-for="user in users" :key="user.user_id">{{user.user_name}}</li>
   </ul>
 
-  <div v-for="user in users" :key="user.user_id">
-    <p>{{ user.user_name }}</p>
+  <div v-for="fruto in frutos" :key="fruto">
+    <p>{{ fruto }}</p>
   </div>
 
 </div>
@@ -16,7 +16,7 @@
 <script>
 import autservices from "@/services/autservices"
 export default {
-  el: 'users',
+  name: 'users',
   data () {
     return {
       users:[],

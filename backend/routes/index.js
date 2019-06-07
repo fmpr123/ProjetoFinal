@@ -8,4 +8,8 @@ router.get('/users',
   userController.show_users
 );
 
+router.post('/addusers', 
+  userController.add_users
+);
+
 module.exports = router;
