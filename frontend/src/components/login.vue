@@ -1,4 +1,3 @@
-
 <template>
   <v-app id="inspire">
     <v-layout justify-center align-center>
