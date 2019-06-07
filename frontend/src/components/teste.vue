@@ -3,12 +3,12 @@
   <p>Users:</p>
 
   <ul id="users">
-    <li v-for="user in users" :key="user.user_id">{{user.user_name}}</li>
+    <li v-for="(user,key) in users" :key="key">{{user.user_name}}</li>
   </ul>
 
-  <div v-for="fruto in frutos" :key="fruto">
+  <!-- <div v-for="fruto in frutos" :key="fruto">
     <p>{{ fruto }}</p>
-  </div>
+  </div> -->
 
 </div>
 </template>
@@ -20,11 +20,12 @@ export default {
   data () {
     return {
       users:[],
-      frutos:['banana','tomate']
+      // frutos:['banana','tomate']
     }
   },
   async mounted(){
     this.users=(await autservices.show()).data;
+    console.log(this.users)
   }
 }
 </script>
