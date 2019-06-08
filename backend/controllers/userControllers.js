@@ -64,3 +64,38 @@ exports.add_post = async function (req, res) {
     })
 };
 
+exports.show_post = async function (req, res) {
+    var query = 'select * from post';
+    await connection.query(query, (err, rows, fields) => {
+        if (!err) {
+            res.send(rows);
+        } else {
+            console.log('Error!');
+        }
+    });
+};
+
+exports.show_games = async function (req, res) {
+    var query = 'select * from game';
+    await connection.query(query, (err, rows, fields) => {
+        if (!err) {
+            res.send(rows);
+        } else {
+            console.log('Error!');
+        }
+    });
+};
+
+exports.comment = async function (req, res) {
+    var query = 'insert into comment(comment_content, post_id, user_id) values (?,?,?)';
+    var comment = req.body.comment_content;
+    var post = req.params.post_id;
+    var user = req.body.user_id;
+    await connection.query(query, [comment, post, user], (err, rows, fields) => {
+        if (!err) {
+            res.send(rows);
+        } else {
+            console.log("Error!");
+        }
+    })
+};
