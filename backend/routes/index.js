@@ -20,4 +20,16 @@ router.post('/post',
   userController.add_post
 );
 
+router.get('/:game_id/posts',
+  userController.show_post
+);
+
+router.get('/showgames',
+  userController.show_games
+);
+
+router.post('/post/:post_id/comment',
+  userController.comment
+);
+
 module.exports = router;
