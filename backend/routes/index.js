@@ -32,4 +32,8 @@ router.post('/post/:post_id/comment',
   userController.comment
 );
 
+router.post('/post/:post_id/like',
+  userController.like
+);
+
 module.exports = router;
