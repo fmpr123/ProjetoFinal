@@ -99,3 +99,15 @@ exports.comment = async function (req, res) {
         }
     })
 };
+
+exports.like = async function(req, res) {
+    var query = "UPDATE post SET post_like = post_like+1 where post_id=?";
+    var post = req.params.post_id;
+    await connection.query(query,post, (err, rows, fields)=> {
+        if (!err){
+            res.send(rows);
+        } else {
+            console.log("Error!");
+        }
+    })
+}
