@@ -4,6 +4,7 @@ import login from '@/components/login'
 import teste from '@/components/teste'
 import signup from '@/components/signup'
 import main from '@/components/main'
+import profile from '@/components/profile'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/main',
       name: 'main',
       component: main
-    }
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: profile
+  }
   ]
 })

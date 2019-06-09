@@ -20,7 +20,7 @@ router.post('/post',
   userController.add_post
 );
 
-router.get('/:game_id/posts',
+router.get('/posts',
   userController.show_post
 );
 
