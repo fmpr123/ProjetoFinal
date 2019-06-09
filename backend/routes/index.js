@@ -29,11 +29,15 @@ router.get('/showgames',
 );
 
 router.post('/post/:post_id/comment',
-  userController.comment
+  userController.add_comment
 );
 
 router.post('/post/:post_id/like',
   userController.like
+);
+
+router.get('/comments',
+  userController.show_comment
 );
 
 module.exports = router;

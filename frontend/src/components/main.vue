@@ -13,7 +13,6 @@
         class="hidden-sm-and-down"
       ></v-text-field>
       <v-spacer></v-spacer>
-
       <v-menu offset-y>
         <template v-slot:activator="{ on }">
           <v-btn color="#B3B6B7" dark v-on="on">Menu</v-btn>
@@ -28,9 +27,6 @@
     <v-content>
       <v-container fluid fill-height></v-container>
     </v-content>
-
-    <!-- ----------------- -->
-
     <ul id="posts">
       <li style="list-style:none" v-for="post in posts" :key="post.post_id">
         <v-layout border="black">
@@ -40,27 +36,22 @@
                 <v-card-title primary-title>
                   <div>
                     <v-layout justify-center>
-                      <v-img
-                        src="https://static-cdn.jtvnw.net/ttv-boxart/World%20of%20Warcraft-285x380.jpg"
-                        height="380px"
-                        width="285px"
-                      ></v-img>
+                      <v-img :src="post.game_photo" height="380px" width="285px"></v-img>
                     </v-layout>
-                    <h3 class="headline mb-0">{{post.post_id}}</h3>
+                    <h3 class="headline mb-0">{{post.game_name}}</h3>
                     <div>{{ post.post_content }}</div>
                   </div>
                 </v-card-title>
               </v-layout>
-
               <v-card-actions>
-                <v-btn flat color="orange">Like</v-btn>
+                <v-btn flat color="orange" @click>Like</v-btn>
                 <v-btn flat color="orange" @click="commentary =!commentary">Comment</v-btn>
-                <v-text>Teste</v-text>
+                <v-spacer></v-spacer>
+                <v-text class="title">{{post.post_like}}</v-text>
               </v-card-actions>
             </v-card>
           </v-flex>
         </v-layout>
-        <!-- Comentary -->
         <v-dialog v-model="commentary" width="800px">
           <v-card>
             <v-card-title class="grey lighten-4 py-4 title">Create comment</v-card-title>
@@ -81,15 +72,13 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-text>{{post.comments}}</v-text>
       </li>
     </ul>
-
     <!-- ----------------- -->
-
     <v-btn fab bottom right color="#6F1A07" dark fixed @click="dialog = !dialog">
       <v-icon>add</v-icon>
     </v-btn>
-
     <v-dialog v-model="dialog" width="800px">
       <v-card>
         <v-card-title class="grey lighten-4 py-4 title">Create Post</v-card-title>
@@ -152,3 +141,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+v-text {
+  color: #ff9800;
+}
+</style>

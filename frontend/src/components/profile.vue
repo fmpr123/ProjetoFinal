@@ -49,6 +49,9 @@ export default {
     choice:null,
     items: [{ title: "Home",id:"/main" }, { title: "Profile",id:"/profile" }, { title: "SignOut",id:"/" }]
   }),
-  props: {}
+  props: {},
+  methods:{
+    
+  }
 };
 </script>
