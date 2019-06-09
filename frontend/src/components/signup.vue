@@ -22,7 +22,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="#B3B6B7">Cancel</v-btn>
+                <v-btn color="#B3B6B7" to="/">Cancel</v-btn>
                 <v-btn color="#6F1A07">Sign-Up</v-btn>
               </v-card-actions>
             </v-card>
