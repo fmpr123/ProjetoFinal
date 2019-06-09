@@ -47,7 +47,7 @@
 export default {
   data: () => ({
     choice:null,
-    items: [{ title: "Home",id:'/#/home' }, { title: "Profile",id:'/#/profile' }, { title: "SignOut",id:'/#/login' }]
+    items: [{ title: "Home",id:"/main" }, { title: "Profile",id:"/profile" }, { title: "SignOut",id:"/" }]
   }),
   props: {}
 };

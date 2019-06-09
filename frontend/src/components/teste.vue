@@ -25,7 +25,6 @@ export default {
   },
   async mounted(){
     this.users=(await autservices.show()).data;
-    console.log(this.users)
   }
 }
 </script>

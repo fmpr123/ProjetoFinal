@@ -19,7 +19,7 @@
           <v-btn color="#B3B6B7" dark v-on="on">Menu</v-btn>
         </template>
         <v-list>
-          <v-list-tile v-for="(item, index) in items" :key="index" @click>
+          <v-list-tile v-for="(item, index) in items" :key="index" :to="item.id">
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -28,51 +28,62 @@
     <v-content>
       <v-container fluid fill-height></v-container>
     </v-content>
-    <v-layout border="black">
-      <v-flex xs12 sm6 offset-sm3>
-        <v-card>
-          <v-card-title primary-title>
-            <div>
-              <v-layout justify-center>
-                <v-img
-                  src="https://static-cdn.jtvnw.net/ttv-boxart/FIFA%2019-285x380.jpg"
-                  height="390px"
-                  max-width="300px"
-                ></v-img>
-              </v-layout>
-              <h3 class="headline mb-0">Game name</h3>
-              <div>{{ card_text }}</div>
-            </div>
-          </v-card-title>
 
-          <v-card-actions>
-            <v-btn flat color="orange">Like</v-btn>
-            <v-btn flat color="orange" @click="commentary =!commentary">Comment</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-    <!-- Comentary -->
-    <v-dialog v-model="commentary" width="800px">
-      <v-card>
-        <v-card-title class="grey lighten-4 py-4 title">Create comment</v-card-title>
-        <v-container grid-list-sm class="pa-4">
-          <v-layout row wrap>
-            <v-flex xs12 align-center justify-space-between>
-              <v-layout align-center>
-                <v-text-field placeholder="Comment"></v-text-field>
+    <!-- ----------------- -->
+
+    <ul id="posts">
+      <li style="list-style:none" v-for="post in posts" :key="post.post_id">
+        <v-layout border="black">
+          <v-flex xs12 sm6 offset-sm3>
+            <v-card>
+              <v-layout justify-center>
+                <v-card-title primary-title>
+                  <div>
+                    <v-layout justify-center>
+                      <v-img
+                        src="https://static-cdn.jtvnw.net/ttv-boxart/World%20of%20Warcraft-285x380.jpg"
+                        height="380px"
+                        width="285px"
+                      ></v-img>
+                    </v-layout>
+                    <h3 class="headline mb-0">{{post.post_id}}</h3>
+                    <div>{{ post.post_content }}</div>
+                  </div>
+                </v-card-title>
               </v-layout>
-            </v-flex>
-            <v-flex xs1></v-flex>
-          </v-layout>
-        </v-container>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="commentary = false">Cancel</v-btn>
-          <v-btn flat @click="dialog = false">Comment</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+
+              <v-card-actions>
+                <v-btn flat color="orange">Like</v-btn>
+                <v-btn flat color="orange" @click="commentary =!commentary">Comment</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
+        <!-- Comentary -->
+        <v-dialog v-model="commentary" width="800px">
+          <v-card>
+            <v-card-title class="grey lighten-4 py-4 title">Create comment</v-card-title>
+            <v-container grid-list-sm class="pa-4">
+              <v-layout row wrap>
+                <v-flex xs12 align-center justify-space-between>
+                  <v-layout align-center>
+                    <v-text-field placeholder="Comment"></v-text-field>
+                  </v-layout>
+                </v-flex>
+                <v-flex xs1></v-flex>
+              </v-layout>
+            </v-container>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn flat color="primary" @click="commentary = false">Cancel</v-btn>
+              <v-btn flat @click="dialog = false">Comment</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </li>
+    </ul>
+
+    <!-- ----------------- -->
 
     <v-btn fab bottom right color="#6F1A07" dark fixed @click="dialog = !dialog">
       <v-icon>add</v-icon>
@@ -113,8 +124,10 @@
 </template>
 
 <script>
+import autservices from "@/services/autservices";
 export default {
   data: () => ({
+    posts: [],
     dialog: false,
     commentary: false,
     choice: null,
@@ -124,9 +137,15 @@ export default {
       { title: "Fifa 19" },
       { title: "Fortnite" }
     ],
-    card_text:
-      "Lorem ipsum dolor sit amet, brute iriure accusata ne mea. Eos suavitate referrentur ad, te duo agam libris qualisque, utroque quaestio accommodare no qui. Et percipit laboramus usu, no invidunt verterem nominati mel. Dolorem ancillae an mei, ut putant invenire splendide mel, ea nec propriae adipisci. Ignota salutandi accusamus in sed, et per malis fuisset, qui id ludus appareat."
+    items: [
+      { title: "Home", id: "/main" },
+      { title: "Profile", id: "/profile" },
+      { title: "SignOut", id: "/" }
+    ]
   }),
+  async mounted() {
+    this.posts = (await autservices.show()).data;
+  },
   props: {
     source: String
   }
