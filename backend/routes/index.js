@@ -16,12 +16,12 @@ router.post('/',
   userController.login
 );
 
-router.post('/post',
+router.post('/addpost',
   userController.add_post
 );
 
-router.get('/posts',
-  userController.show_post
+router.get('/maindata',
+  userController.main_data
 );
 
 router.get('/showgames',

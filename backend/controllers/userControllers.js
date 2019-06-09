@@ -64,7 +64,7 @@ exports.add_post = async function (req, res) {
     })
 };
 
-exports.show_post = async function (req, res) {
+exports.main_data = async function (req, res) {
     var query = 'select *, GROUP_CONCAT(comment_content) as comments, comment.*, game.* from post inner join comment on comment.post_id=post.post_id inner join game on game.game_id=post.game_id group by post.post_id ORDER BY post.post_id';
     await connection.query(query, (err, rows, fields) => {
         if (!err) {

@@ -50,8 +50,5 @@ export default {
     items: [{ title: "Home",id:"/main" }, { title: "Profile",id:"/profile" }, { title: "SignOut",id:"/" }]
   }),
   props: {},
-  methods:{
-    
-  }
 };
 </script>
