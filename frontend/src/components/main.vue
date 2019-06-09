@@ -55,6 +55,7 @@
               <v-card-actions>
                 <v-btn flat color="orange">Like</v-btn>
                 <v-btn flat color="orange" @click="commentary =!commentary">Comment</v-btn>
+                <v-text>Teste</v-text>
               </v-card-actions>
             </v-card>
           </v-flex>
