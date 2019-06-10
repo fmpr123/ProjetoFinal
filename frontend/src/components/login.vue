@@ -21,8 +21,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="#B3B6B7">Login</v-btn>
-                <v-btn color="#6F1A07" to="/signup" >Sign-Up</v-btn>
+                <v-btn color="#B3B6B7" to="/main">Login</v-btn>
+                <v-btn color="brown" to="/signup" >Sign-Up</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>

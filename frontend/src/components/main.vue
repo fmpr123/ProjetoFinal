@@ -44,7 +44,7 @@
                 </v-card-title>
               </v-layout>
               <v-card-actions>
-                <v-btn flat color="orange" @click>Like</v-btn>
+                <v-btn flat color="orange" @click="update">Like</v-btn>
                 <v-btn flat color="orange" @click="commentary =!commentary">Comment</v-btn>
                 <v-spacer></v-spacer>
                 <v-text class="title">{{post.post_like}}</v-text>
@@ -59,7 +59,7 @@
               <v-layout row wrap>
                 <v-flex xs12 align-center justify-space-between>
                   <v-layout align-center>
-                    <v-text-field placeholder="Comment"></v-text-field>
+                    <v-text-field v-model="comment_data" placeholder="Comment"></v-text-field>
                   </v-layout>
                 </v-flex>
                 <v-flex xs1></v-flex>
@@ -68,7 +68,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn flat color="primary" @click="commentary = false">Cancel</v-btn>
-              <v-btn flat @click="dialog = false">Comment</v-btn>
+              <v-btn flat @click="commentary = false">Comment</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -118,8 +118,10 @@ import autservices from "@/services/autservices";
 export default {
   data: () => ({
     posts: [],
+    comment_data:null,
     dialog: false,
     commentary: false,
+    post_id:1,
     choice: null,
     items: [{ title: "Home" }, { title: "Profile" }, { title: "SignOut" }],
     games: [
@@ -136,8 +138,13 @@ export default {
   async mounted() {
     this.posts = (await autservices.show()).data;
   },
-  props: {
-    source: String
+  methods:{
+    update(){
+      autservices.add({
+        post_id:this.post_id
+      })
+      location.reload();
+    }
   }
 };
 </script>

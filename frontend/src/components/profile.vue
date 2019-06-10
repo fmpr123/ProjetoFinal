@@ -28,27 +28,44 @@
 
     <v-layout justify-center align-center>
       <v-content>
-          <h1>Add user information</h1>
+        <h1>Add user information</h1>
         <v-layout justify-center>
           <v-flex xs12 sm8>
             <v-form color="#F7F3E3">
-              <v-text-field id="user-address" prepend-icon="home" name="address" label="Address" type="text"></v-text-field>
-              <v-text-field id="user-age" prepend-icon="event" name="age" label="Age" type="text"></v-text-field>
-              <v-text-field id="user-photo" prepend-icon="person" name="photo" label="Photo" type="text"></v-text-field>
+              <v-text-field v-model="address" prepend-icon="home" name="address" label="Address" type="text"></v-text-field>
+              <v-text-field v-model="age" prepend-icon="event" name="age" label="Age" type="text"></v-text-field>
+              <v-text-field v-model="photo" prepend-icon="person" name="photo" label="Photo" type="text"></v-text-field>
             </v-form>
           </v-flex>
         </v-layout>
-        <v-btn color="#B3B6B7">Submit</v-btn>
+        <v-btn @click="update" color="#B3B6B7">Submit</v-btn>
       </v-content>
     </v-layout>
   </v-app>
 </template>
 <script>
+import autservices from "@/services/autservices";
 export default {
   data: () => ({
-    choice:null,
-    items: [{ title: "Home",id:"/main" }, { title: "Profile",id:"/profile" }, { title: "SignOut",id:"/" }]
+    choice: null,
+    address:null,
+    age: null,
+    photo:null,
+    items: [
+      { title: "Home", id: "/main" },
+      { title: "Profile", id: "/profile" },
+      { title: "SignOut", id: "/" }
+    ]
   }),
-  props: {},
+  methods:{
+    update(){
+      autservices.update({
+        address:this.address,
+        age:this.age,
+        photo:this.photo
+      })
+      location.reload();
+    }
+  }
 };
 </script>

@@ -20,6 +20,20 @@ exports.show_users = async function (req, res) {
     });
 };
 
+exports.update_users = async function (req, res) {
+    var query = "UPDATE user SET user_address=?, user_age=?, user_photo=? WHERE user_id=1";
+    var address=req.body.address;
+    var age=req.body.age;
+    var photo=req.body.photo;
+    await connection.query(query,[address,age,photo], (err, rows, fields) => {
+        if (!err) {
+            res.send(rows);
+        } else {
+            console.log('Error!');
+        }
+    });
+};
+
 exports.add_users = async function (req, res) {
     var query = "insert into user(user_name,user_email,user_password)values(?,?,?)";
     var name = req.body.user_name;
@@ -52,10 +66,12 @@ exports.login = async function (req, res) {
 };
 
 exports.add_post = async function (req, res) {
-    var query = "insert into post(post_content, user_id)values(?,?)";
+    var query = "insert into post(post_content,post_like,user_id,game_id)values(?,?,?,?)";
     var content = req.body.post_content;
+    var like = req.body.post_like;
     var user = req.body.user_id;
-    await connection.query(query, [content,user], (err, rows, fields) => {
+    var game = req.body.game_id;
+    await connection.query(query, [content,like,user,game], (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {
@@ -98,11 +114,11 @@ exports.show_comment = async function (req, res) {
 };
 
 exports.add_comment = async function (req, res) {
-    var query = 'insert into comment(comment_content, post_id, user_id) values (?,?,?)';
+    var query = 'insert into comment(comment_content,user_id,post_id) values (?,?,?)';
     var comment = req.body.comment_content;
-    var post = req.params.post_id;
     var user = req.body.user_id;
-    await connection.query(query, [comment, post, user], (err, rows, fields) => {
+    var post = req.params.post_id;
+    await connection.query(query, [comment, user, post], (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {
@@ -112,8 +128,8 @@ exports.add_comment = async function (req, res) {
 };
 
 exports.like = async function(req, res) {
-    var query = "UPDATE post SET post_like = post_like+1 where post_id=?";
-    var post = req.params.post_id;
+    var query = "UPDATE post SET post_like=post_like+1 where post_id=?";
+    var post = req.body.post_id;
     await connection.query(query,post, (err, rows, fields)=> {
         if (!err){
             res.send(rows);
@@ -122,4 +138,3 @@ exports.like = async function(req, res) {
         }
     })
 };
-

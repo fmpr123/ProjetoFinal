@@ -28,11 +28,15 @@ router.get('/showgames',
   userController.show_games
 );
 
+router.patch('/update_users',
+  userController.update_users
+);
+
 router.post('/post/:post_id/comment',
   userController.add_comment
 );
 
-router.post('/post/:post_id/like',
+router.post('/like',
   userController.like
 );
 
