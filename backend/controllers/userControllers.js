@@ -20,6 +20,17 @@ exports.show_users = async function (req, res) {
     });
 };
 
+exports.show_posts = async function (req, res) {
+    var query = 'select * from post';
+    await connection.query(query, (err, rows, fields) => {
+        if (!err) {
+            res.send(rows);
+        } else {
+            console.log('Error!');
+        }
+    });
+};
+
 exports.update_users = async function (req, res) {
     var query = "UPDATE user SET user_address=?, user_age=?, user_photo=? WHERE user_id=1";
     var address=req.body.address;
