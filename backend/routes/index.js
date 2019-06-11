@@ -44,4 +44,16 @@ router.get('/comments',
   userController.show_comment
 );
 
+router.get('/deleteuser',
+  userController.delete_user
+);
+
+router.get('/deletecomment',
+  userController.delete_comment
+);
+
+router.get('/deletepost',
+  userController.delete_post
+);
+
 module.exports = router;

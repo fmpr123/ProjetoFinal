@@ -138,3 +138,40 @@ exports.like = async function(req, res) {
         }
     })
 };
+
+// Delete
+exports.delete_user = async function(req, res) {
+    var query = "delete * from user where user_id=?";
+    var user = req.body.user_id;
+    await connection.query(query,user, (err, rows, fields)=> {
+        if (!err){
+            res.send(rows);
+        } else {
+            console.log("Error!");
+        }
+    })
+};
+
+exports.delete_comment = async function(req, res) {
+    var query = "delete * from comment where comment_id=?";
+    var user = req.body.comment_id;
+    await connection.query(query,user, (err, rows, fields)=> {
+        if (!err){
+            res.send(rows);
+        } else {
+            console.log("Error!");
+        }
+    })
+};
+
+exports.delete_post = async function(req, res) {
+    var query = "delete * from post where post_id=?";
+    var user = req.body.post_id;
+    await connection.query(query,user, (err, rows, fields)=> {
+        if (!err){
+            res.send(rows);
+        } else {
+            console.log("Error!");
+        }
+    })
+};
