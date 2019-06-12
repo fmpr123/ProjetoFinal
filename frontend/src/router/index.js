@@ -4,6 +4,7 @@ import login from '@/components/login'
 import signup from '@/components/signup'
 import main from '@/components/main'
 import profile from '@/components/profile'
+import teste from '@/components/teste'
 
 Vue.use(Router)
 
