@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login'
-import teste from '@/components/teste'
 import signup from '@/components/signup'
 import main from '@/components/main'
 import profile from '@/components/profile'
