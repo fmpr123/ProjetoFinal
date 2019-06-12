@@ -77,12 +77,10 @@ exports.login = async function (req, res) {
 };
 
 exports.add_post = async function (req, res) {
-    var query = "insert into post(post_content,post_like,user_id,game_id)values(?,?,?,?)";
+    var query = "insert into post(post_content,game_id)values(?,?)";
     var content = req.body.post_content;
-    var like = req.body.post_like;
-    var user = req.body.user_id;
-    var game = req.body.game_id;
-    await connection.query(query, [content,like,user,game], (err, rows, fields) => {
+    var game_id=req.body.game_id;
+    await connection.query(query, [content,game_id], (err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {

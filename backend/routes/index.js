@@ -8,6 +8,10 @@ router.get('/users',
   userController.show_users
 );
 
+router.get('/posts', 
+  userController.show_posts
+);
+
 router.post('/addusers', 
   userController.add_users
 );

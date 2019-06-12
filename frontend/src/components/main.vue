@@ -47,7 +47,7 @@
                 <v-btn flat color="orange" @click="update">Like</v-btn>
                 <v-btn flat color="orange" @click="commentary =!commentary">Comment</v-btn>
                 <v-spacer></v-spacer>
-                <v-text class="title">{{post.post_like}}</v-text>
+                <v-text class="title">{{post.post_like}}<v-icon color="orange">thumb_up</v-icon></v-text>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -86,7 +86,7 @@
           <v-layout row wrap>
             <v-flex xs12 align-center justify-space-between>
               <v-layout align-center>
-                <v-text-field placeholder="Post"></v-text-field>
+                <v-text-field v-model="post_data" placeholder="Post"></v-text-field>
               </v-layout>
             </v-flex>
             <v-flex xs1></v-flex>
@@ -118,6 +118,7 @@ import autservices from "@/services/autservices";
 export default {
   data: () => ({
     posts: [],
+    post_data:null,
     comment_data:null,
     dialog: false,
     commentary: false,
@@ -125,9 +126,9 @@ export default {
     choice: null,
     items: [{ title: "Home" }, { title: "Profile" }, { title: "SignOut" }],
     games: [
-      { title: "World of Warcraft" },
-      { title: "Fifa 19" },
-      { title: "Fortnite" }
+      { title: "World of Warcraft",id:1},
+      { title: "Fifa 19",id:2},
+      { title: "Fortnite",id:3 }
     ],
     items: [
       { title: "Home", id: "/main" },
@@ -142,6 +143,12 @@ export default {
     update(){
       autservices.add({
         post_id:this.post_id
+      })
+      location.reload();
+    },
+    add_post(){
+      autservices.add({
+        
       })
       location.reload();
     }
