@@ -60,7 +60,7 @@ router.get('/deletecomment',
   userController.delete_comment
 );
 
-router.get('/deletepost',
+router.delete('/deletepost',
   userController.delete_post
 );
 

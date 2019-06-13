@@ -27,17 +27,13 @@
     </v-toolbar>
     <v-layout justify-center align-center>
       <v-content>
-        
         <ul id="users">
           <li style="list-style:none" v-for="user in users" :key="user.user_id">
-            <v-layout border="black">
-              <v-flex xs12 sm6 offset-sm3>
-                <v-layout justify-center>
-                  <div>
-                    <v-img :src="user.user_photo" height="200px" width="150"></v-img>
-                  </div>
-                </v-layout>
+              <v-flex d-flex flex-row-reverse>
                 <div>
+                  <v-img :src="user.user_photo" height="200px" width="150"></v-img>
+                </div>
+                <div justify-center align-center>
                   <v-text class="title">
                     <p>
                       <b>Name:</b>
@@ -57,14 +53,11 @@
                     </p>
                   </v-text>
                   <v-text class="title">
-                    <p>
                       <b>Age:</b>
                       {{user.user_age}}
-                    </p>
                   </v-text>
                 </div>
               </v-flex>
-            </v-layout>
           </li>
         </ul>
 
@@ -72,25 +65,26 @@
         <v-layout justify-center>
           <v-flex xs12 sm8>
             <v-form color="#F7F3E3">
-              <v-text-field
-                v-model="address"
-                prepend-icon="home"
-                name="address"
-                label="Address"
-                type="text"
-              ></v-text-field>
+              <v-text-field v-model="address" prepend-icon="home" name="address" label="Address" type="text"></v-text-field>
               <v-text-field v-model="age" prepend-icon="event" name="age" label="Age" type="text"></v-text-field>
-              <v-text-field
-                v-model="photo"
-                prepend-icon="person"
-                name="photo"
-                label="Photo"
-                type="text"
-              ></v-text-field>
+              <v-text-field v-model="photo" prepend-icon="person" name="photo" label="Photo" type="text"></v-text-field>
             </v-form>
           </v-flex>
         </v-layout>
         <v-btn @click="update" color="#B3B6B7">Submit</v-btn>
+
+
+        <h1>Delete post</h1>
+        <v-layout justify-center>
+          <v-flex xs12 sm8>
+            <v-form color="#F7F3E3">
+              <v-text-field v-model="post" prepend-icon="info" name="post" label="Post" type="text"></v-text-field>
+            </v-form>
+          </v-flex>
+        </v-layout>
+        <v-btn @click="delete_post" color="red">Submit</v-btn>
+
+
       </v-content>
     </v-layout>
   </v-app>
@@ -100,6 +94,7 @@ import autservices from "@/services/autservices";
 export default {
   data: () => ({
     users: [],
+    post:null,
     choice: null,
     address: null,
     age: null,
@@ -119,6 +114,12 @@ export default {
         address: this.address,
         age: this.age,
         photo: this.photo
+      });
+      location.reload();
+    },
+    delete_post() {
+      autservices.delete_post({
+        post_id:this.post
       });
       location.reload();
     }
