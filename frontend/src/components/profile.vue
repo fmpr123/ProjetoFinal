@@ -27,31 +27,46 @@
     </v-toolbar>
     <v-layout justify-center align-center>
       <v-content>
-
-        <v-layout justify-center>
-          <ul id="users">
-            <li style="list-style:none" v-for="user in users" :key="user.user_id">
-              <v-layout>
-                <v-img :src="user.user_photo" height="200px" width="150"></v-img>
-              </v-layout>
-              <v-layout>
-                <v-spacer></v-spacer>
-              </v-layout>
-              <v-text class="title">
-                <p><b>Name: </b>{{user.user_name}}</p>
-              </v-text >
-              <v-text class="title">
-                <p><b>Email: </b>{{user.user_email}}</p>
-              </v-text>
-              <v-text class="title">
-                <p><b>Address: </b>{{user.user_address}}</p>
-              </v-text>
-              <v-text class="title">
-                <p><b>Age: </b>{{user.user_age}}</p>
-              </v-text>
-            </li>
-          </ul>
-        </v-layout>
+        
+        <ul id="users">
+          <li style="list-style:none" v-for="user in users" :key="user.user_id">
+            <v-layout border="black">
+              <v-flex xs12 sm6 offset-sm3>
+                <v-layout justify-center>
+                  <div>
+                    <v-img :src="user.user_photo" height="200px" width="150"></v-img>
+                  </div>
+                </v-layout>
+                <div>
+                  <v-text class="title">
+                    <p>
+                      <b>Name:</b>
+                      {{user.user_name}}
+                    </p>
+                  </v-text>
+                  <v-text class="title">
+                    <p>
+                      <b>Email:</b>
+                      {{user.user_email}}
+                    </p>
+                  </v-text>
+                  <v-text class="title">
+                    <p>
+                      <b>Address:</b>
+                      {{user.user_address}}
+                    </p>
+                  </v-text>
+                  <v-text class="title">
+                    <p>
+                      <b>Age:</b>
+                      {{user.user_age}}
+                    </p>
+                  </v-text>
+                </div>
+              </v-flex>
+            </v-layout>
+          </li>
+        </ul>
 
         <h1>Add/Update user information</h1>
         <v-layout justify-center>
@@ -110,3 +125,6 @@ export default {
   }
 };
 </script>
+
+
+// https://imgur.com/a/KDB8Agg
