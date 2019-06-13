@@ -18,13 +18,15 @@ primary key(game_id));
 create table post(post_id int not null auto_increment,
 post_content varchar(200) not null,
 post_date datetime default current_timestamp on update current_timestamp,
-post_like int,
+post_like int DEFAULT 0,
 user_id int,
 user_photo varchar(50),
 game_id int,
 primary key(post_id),
-foreign key(user_id)references user(user_id),
-foreign key(game_id)references game(game_id));
+foreign key(user_id)references user(user_id)
+ON DELETE CASCADE,
+foreign key(game_id)references game(game_id)
+ON DELETE CASCADE);
 
 create table comment(comment_id int not null auto_increment,
 comment_content varchar(200) not null,
@@ -32,5 +34,7 @@ comment_date datetime default current_timestamp on update current_timestamp,
 user_id int not null,
 post_id int not null,
 primary key(comment_id),
-foreign key(user_id)references user(user_id),
-foreign key(post_id)references post(post_id));
+foreign key(user_id)references user(user_id)
+ON DELETE CASCADE,
+foreign key(post_id)references post(post_id)
+ON DELETE CASCADE);
