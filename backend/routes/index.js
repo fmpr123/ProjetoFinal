@@ -8,6 +8,10 @@ router.get('/users',
   userController.show_users
 );
 
+router.get('/user', 
+  userController.show_user
+);
+
 router.get('/posts', 
   userController.show_posts
 );
@@ -20,7 +24,7 @@ router.post('/',
   userController.login
 );
 
-router.post('/addpost',
+router.patch('/addpost',
   userController.add_post
 );
 
@@ -40,7 +44,7 @@ router.post('/post/:post_id/comment',
   userController.add_comment
 );
 
-router.post('/like',
+router.patch('/like',
   userController.like
 );
 

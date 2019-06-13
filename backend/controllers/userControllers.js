@@ -20,6 +20,17 @@ exports.show_users = async function (req, res) {
     });
 };
 
+exports.show_user = async function (req, res) {
+    var query = 'select * from user where user_id=1';
+    await connection.query(query, (err, rows, fields) => {
+        if (!err) {
+            res.send(rows);
+        } else {
+            console.log('Error!');
+        }
+    });
+};
+
 exports.show_posts = async function (req, res) {
     var query = 'select * from post';
     await connection.query(query, (err, rows, fields) => {
@@ -90,7 +101,7 @@ exports.add_post = async function (req, res) {
 };
 
 exports.main_data = async function (req, res) {
-    var query = 'select *, GROUP_CONCAT(comment_content) as comments, comment.*, game.* from post inner join comment on comment.post_id=post.post_id inner join game on game.game_id=post.game_id group by post.post_id ORDER BY post.post_id';
+    var query = 'SELECT *, GROUP_CONCAT(comment_content) as comments, comment.*, game.* FROM post LEFT JOIN comment ON comment.post_id=post.post_id LEFT JOIN game ON game.game_id=post.game_id GROUP BY post.post_id ORDER BY post.post_id';
     await connection.query(query, (err, rows, fields) => {
         if (!err) {
             res.send(rows);

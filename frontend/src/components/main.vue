@@ -44,8 +44,8 @@
                 </v-card-title>
               </v-layout>
               <v-card-actions>
-                <v-btn flat color="orange" @click="update">Like</v-btn>
-                <v-btn flat color="orange" @click="commentary =!commentary">Comment</v-btn>
+                <v-btn flat color="orange" @click="likes">Like</v-btn>
+                <v-btn flat color="orange" @click="commentary = !commentary">Comment</v-btn>
                 <v-spacer></v-spacer>
                 <v-text class="title">{{post.post_like}}<v-icon color="orange">thumb_up</v-icon></v-text>
               </v-card-actions>
@@ -75,7 +75,6 @@
         <v-text>{{post.comments}}</v-text>
       </li>
     </ul>
-    <!-- ----------------- -->
     <v-btn fab bottom right color="#6F1A07" dark fixed @click="dialog = !dialog">
       <v-icon>add</v-icon>
     </v-btn>
@@ -98,15 +97,15 @@
               <v-btn color="#B3B6B7" dark v-on="on">Game</v-btn>
             </template>
             <v-list>
-              <v-list-tile v-for="(game, key) in games" :key="key" @click="choice=game.title">
-                <v-list-tile-title>{{ game.title }}</v-list-tile-title>
+              <v-list-tile v-for="(game, key) in games" :key="key" @click="choice=game.game_id">
+                <v-list-tile-title>{{ game.game_name }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
-          <v-tab>{{choice}}</v-tab>
+          <v-tab >{{choice}}</v-tab>
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="dialog = false">Cancel</v-btn>
-          <v-btn flat @click="dialog = false">Post</v-btn>
+          <v-btn flat @click="add_post">Post</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -118,18 +117,14 @@ import autservices from "@/services/autservices";
 export default {
   data: () => ({
     posts: [],
+    num_post:[],
     post_data:null,
-    comment_data:null,
     dialog: false,
     commentary: false,
     post_id:1,
     choice: null,
     items: [{ title: "Home" }, { title: "Profile" }, { title: "SignOut" }],
-    games: [
-      { title: "World of Warcraft",id:1},
-      { title: "Fifa 19",id:2},
-      { title: "Fortnite",id:3 }
-    ],
+    games: [],
     items: [
       { title: "Home", id: "/main" },
       { title: "Profile", id: "/profile" },
@@ -138,17 +133,19 @@ export default {
   }),
   async mounted() {
     this.posts = (await autservices.show()).data;
+    this.games=(await autservices.games()).data;
   },
   methods:{
-    update(){
-      autservices.add({
-        post_id:this.post_id
+    add_post(){
+      autservices.add_post({
+        post_content:this.post_data,
+        game_id:this.choice
       })
       location.reload();
     },
-    add_post(){
-      autservices.add({
-        
+    likes(){
+      autservices.likes({
+        post_id:this.post_id
       })
       location.reload();
     }
