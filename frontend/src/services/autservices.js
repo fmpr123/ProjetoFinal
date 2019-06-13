@@ -20,7 +20,7 @@ export default{
         return Api().patch('addpost',post_content)
     },
     delete_post(post_id){
-        return Api().patch('deletepost',post_id)
+        return Api().delete('deletepost',post_id)
     },
     games(rows){
         return Api().get('showgames',rows)

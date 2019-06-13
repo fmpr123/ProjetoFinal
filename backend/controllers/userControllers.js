@@ -185,7 +185,7 @@ exports.delete_comment = async function(req, res) {
 };
 
 exports.delete_post = async function(req, res) {
-    var query = "delete * from post where post_id=?";
+    var query = "delete from post where post_id=?";
     var user = req.body.post_id;
     await connection.query(query,user, (err, rows, fields)=> {
         if (!err){
