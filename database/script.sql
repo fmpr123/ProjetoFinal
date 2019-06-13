@@ -13,6 +13,7 @@ primary key(user_id));
 
 create table game(game_id int not null auto_increment,
 game_name varchar(50) not null,
+game_photo varchar(200) not null,
 primary key(game_id));
 
 create table post(post_id int not null auto_increment,
