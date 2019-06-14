@@ -38,7 +38,7 @@
                 <v-flex xs8 sm6 md6 lg6>
                   <v-layout column align-start>
                     <v-card color="#AF9164" class="pa-4 white--text">
-                      <div >
+                      <div>
                         <v-text class="title">
                           <p>
                             <b class="black--text">Name:</b>
