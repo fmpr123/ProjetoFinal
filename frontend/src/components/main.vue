@@ -7,6 +7,7 @@
       <v-text-field
         flat
         solo-inverted
+        v-model="search"
         hide-details
         prepend-inner-icon="search"
         label="Search"
@@ -156,5 +157,6 @@ export default {
 <style scoped>
 v-text {
   color: #ff9800;
+  font-size: 20px;
 }
 </style>

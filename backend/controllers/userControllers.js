@@ -56,7 +56,7 @@ exports.update_users = async function (req, res) {
     });
 };
 
-exports.add_users = async function (req, res) {
+exports.add_user = async function (req, res) {
     var query = "insert into user(user_name,user_email,user_password)values(?,?,?)";
     var name = req.body.user_name;
     var email = req.body.user_email;
@@ -114,6 +114,19 @@ exports.main_data = async function (req, res) {
 exports.show_games = async function (req, res) {
     var query = 'select * from game';
     await connection.query(query, (err, rows, fields) => {
+        if (!err) {
+            res.send(rows);
+        } else {
+            console.log('Error!');
+        }
+    });
+};
+
+exports.add_game = async function (req, res) {
+    var query = 'insert into game(game_name,game_photo)values(?,?)';
+    var name=req.body.game_name;
+    var photo=req.body.game_photo;
+    await connection.query(query,[name,photo],(err, rows, fields) => {
         if (!err) {
             res.send(rows);
         } else {

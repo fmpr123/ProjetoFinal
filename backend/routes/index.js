@@ -12,12 +12,16 @@ router.get('/user',
   userController.show_user
 );
 
+router.patch('/addgame', 
+  userController.add_game
+);
+
 router.get('/posts', 
   userController.show_posts
 );
 
-router.post('/addusers', 
-  userController.add_users
+router.patch('/adduser', 
+  userController.add_user
 );
 
 router.post('/',
@@ -60,7 +64,7 @@ router.get('/deletecomment',
   userController.delete_comment
 );
 
-router.delete('/deletepost',
+router.patch('/deletepost',
   userController.delete_post
 );
 

@@ -15,15 +15,15 @@
               </v-toolbar>
               <v-card-text>
                 <v-form  color="#F7F3E3">
-                  <v-text-field id="user-name" prepend-icon="person" name="login" label="Username" type="text"></v-text-field>
-                  <v-text-field id="user-email" prepend-icon="@" name="login" label="Email" type="text"></v-text-field>
-                  <v-text-field id="user-password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
+                  <v-text-field v-model="user_name" prepend-icon="person" name="login" label="Username" type="text"></v-text-field>
+                  <v-text-field v-model="user_email" prepend-icon="@" name="login" label="Email" type="text"></v-text-field>
+                  <v-text-field v-model="user_password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="#B3B6B7" to="/">Cancel</v-btn>
-                <v-btn color="#6F1A07" to="/main">Sign-Up</v-btn>
+                <v-btn color="#6F1A07" @click="add_user">Sign-Up</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -35,16 +35,23 @@
 </template>
 
 <script>
+import autservices from "@/services/autservices";
   export default {
     data: () => ({
-      drawer: null
+      drawer: null,
+      user_name:null,
+      user_email:null,
+      user_password:null
     }),
-    props: {
-      source: String
+    methods:{
+    add_user(){
+      autservices.add_user({
+        user_name:this.user_name,
+        user_email:this.user_email,
+        user_password:this.user_password
+      })
+      window.location.href = "http://localhost:8080/#/main";
     }
   }
+  }
 </script>
-
-<style>
-
-</style>
