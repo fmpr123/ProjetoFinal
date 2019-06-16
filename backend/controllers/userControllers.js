@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+var LocalStrategy = require('passport-local').Strategy;
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -6,8 +7,64 @@ var connection = mysql.createConnection({
     password: '',
     database: 'socialnetwork'
 });
-
 connection.connect();
+
+module.exports = function (passport) {
+    passport.serializeUser(function (user, done) {
+        done(null, user.user_id);
+    });
+
+    // used to deserialize the user
+    passport.deserializeUser(function (user_id, done) {
+        var query = "select * from user where user_id= " + user_id;
+        connection.query(query, function (err, rows, fields) {
+            return done(null, rows[0]);
+        })
+    });
+    passport.use('local-signup', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField: 'user_email',
+        passwordField: 'user_password',
+        passReqToCallback: true // allows us to pass back the entire request to the callback
+    },
+        function (req, user_email, user_password, done) {
+            connection.query('select * from user where user_email=?', email, function (err, rows, fields) {
+                if (err)
+                    return done(err);
+                if (rows.length) {
+                    return done(null, false, req.flash('loginMessage', 'User already exists.'))
+                } else {
+                    var query = 'INSERT INTO user set ?';
+                    var values = {user_email, user_password};
+                    connection.query(query, values, function (err, result, fields) {
+                        if (err) throw err;
+                        var user= {user_id: result.insertId};
+                        return done(null, user);
+                    })
+                };
+            });          
+        }));
+    passport.use('local-login', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField: 'user_email',
+        passwordField: 'user_password',
+        passReqToCallback: true // allows us to pass back the entire request to the callback
+    },
+        function (req, user_email, user_password, done) { // callback with email and password from our form                        
+            connection.query('select * from user where user_email=?', user_email, function (err, rows, fields) {
+                if (err)
+                    return done(err);
+                if (!rows.length) {
+                    return done(null, false, req.flash('loginMessage', 'No user found.'));
+                }
+                if (!(rows[0].user_password == user_password))
+                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password!'))
+                return done(null, rows[0]);
+            });
+        }));
+};
+
+//-----------------------------------------------
 
 exports.show_users = async function (req, res) {
     var query = 'select * from user';

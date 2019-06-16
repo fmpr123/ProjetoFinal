@@ -1,13 +1,24 @@
 var createError = require('http-errors');
+var session = require('express-session');
 var express = require('express');
 var path = require('path');
-// var passport = require('passport');
+var passport = require('passport');
+var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var logger = require('morgan');
-// var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 var app = express();
 
@@ -21,6 +32,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+require('./config/passport')(passport);
+require('./app/routes.js')(app, passport);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
