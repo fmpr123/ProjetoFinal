@@ -8,7 +8,7 @@ router.get('/users',
   userController.show_users
 );
 
-router.get('/user', 
+router.get('/user',
   userController.show_user
 );
 
