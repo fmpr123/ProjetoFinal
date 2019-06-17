@@ -1,3 +1,5 @@
+
+
 * {
   padding: 0px;
   margin: 0px; }
@@ -253,7 +255,7 @@ input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
 textarea:focus {
-  border: 1px solid #56b4ef !important;
+  border: 1px solid rgb(92, 55, 0) !important;
   -webkit-box-shadow: 0px 0px 5px 1px #c8def0;
   box-shadow: 0px 0px 5px 1px #c8def0;
   /*-webkit-box-shadow: 0px 0px 5px 0px #bed3dc;
@@ -263,8 +265,8 @@ input[type="submit"],
 input[type="button"],
 .pri_btn {
   font-weight: 600;
-  background: #1b9be9;
-  border: 1px solid #1b9be9;
+  background: #AF9164;
+  border: 1px solid rgb(92, 55, 0);
   /*#3e91b3*/
   color: #fff;
   border-radius: 3px;
@@ -278,11 +280,11 @@ input[type="button"],
 input[type="submit"]:focus,
 input[type="button"]:focus,
 .pri_btn:focus {
-  background: #198bd0; }
+  background: rgb(92, 55, 0); }
 
 input[type="submit"]:disabled,
 input[type="button"]:disabled {
-  background: #6ab9e8 !important;
+  background: rgb(92, 55, 0) !important;
   cursor: auto !important; }
   input[type="submit"]:disabled:hover,
   input[type="button"]:disabled:hover {

@@ -19,6 +19,11 @@ import Overlay from './components/others/overlay.vue'
 import Post from './components/post/post.vue'
 import Prompt from './components/others/prompt.vue'
 import Goto from './components/others/goto.vue'
+import Vue from 'vue';
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
+
+Vue.use(Vuetify);
 
 // Import Filters & Directives
 import './f&d/filters'
