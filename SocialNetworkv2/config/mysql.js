@@ -2,15 +2,14 @@
 
 const
   mysql = require('mysql'),
-  hl = require('handy-log'),
-  { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } = process.env
+  hl = require('handy-log')
 
 // CREATES A DB CONNECTION
 const db = mysql.createConnection({
-  host:     MYSQL_HOST,
-  user:     MYSQL_USER,
-  password: MYSQL_PASSWORD,
-  database: MYSQL_DATABASE,
+  host:     8080,
+  user:     "root",
+  password: "",
+  database: "qwerty",
   charset:  'utf8mb4'
 })
 
