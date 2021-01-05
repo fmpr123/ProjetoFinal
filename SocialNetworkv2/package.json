@@ -15,7 +15,7 @@
     "SPA"
   ],
   "dependencies": {
-    "axios": "^0.16.1",
+    "axios": "^0.21.1",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.17.2",
     "client-sessions": "^0.8.0",
